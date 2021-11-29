@@ -7,6 +7,8 @@ namespace ADO.net_DataBase_PayRollService
         static void Main(string[] args)
         {
             Console.WriteLine("\n Welcome to ADO.net Pay Roll Service..");
+            EmployeeRepository connection = new EmployeeRepository();
+            connection.GetAllEmployeeDetails();
             Console.ReadLine();
         }
     }
