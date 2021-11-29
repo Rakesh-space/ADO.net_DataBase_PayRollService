@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -56,6 +57,52 @@ namespace ADO.net_DataBase_PayRollService
             {
                 sqlConnection.Close();  //here Close the SQL Connection
             }
+        }
+
+        public void AddEmployee(EmployeeModel model)
+        {
+            try
+            {
+                using (this.sqlConnection)
+                {
+                    //here use the Sotred_Procedure "Employee_DetailsPro"
+                    SqlCommand command = new SqlCommand("dbo.Employee_DetailsPro", this.sqlConnection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@name", model.employeeName);
+                    command.Parameters.AddWithValue("@Basic_Pay", model.basicPay);
+                    //command.Parameters.AddWithValue("@EmployeeId", model.id_num);
+                    command.Parameters.AddWithValue("@StartDate", model.startDate);
+                    //command.Parameters.AddWithValue("@Salary", model.Salary);
+                    //command.Parameters.AddWithValue("@Phone", model.PhoneNumber);
+                    // command.Parameters.AddWithValue("@address", model.Address);
+                    //command.Parameters.AddWithValue("@department", model.Department);
+                    command.Parameters.AddWithValue("@gender", model.gender);
+                    //command.Parameters.AddWithValue("@Deduction", model.Deduction);
+                    //command.Parameters.AddWithValue("@NetPay", model.NetPay);
+                    //command.Parameters.AddWithValue("@incomeTax", model.IncomeTax);
+                    //command.Parameters.AddWithValue("@Taxable_pay", model.TaxablePay);
+                    sqlConnection.Open();
+                    var result = command.ExecuteNonQuery();
+
+                    if (result != 0)
+                    {
+                        Console.WriteLine("Succesfull inserted record");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Unsuccesfull");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+
         }
     }
 }
