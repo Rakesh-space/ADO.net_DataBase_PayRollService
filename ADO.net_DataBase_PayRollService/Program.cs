@@ -16,7 +16,7 @@ namespace ADO.net_DataBase_PayRollService
             model.basicPay = 3560.50;
             model.gender = "M";
             model.startDate = DateTime.Now;
-            //model.id_num = 10;
+         
 
             EmployeeRepository Repo = new EmployeeRepository();
             Repo.AddEmployee(model);
@@ -24,3 +24,4 @@ namespace ADO.net_DataBase_PayRollService
         }
     }
 }
+

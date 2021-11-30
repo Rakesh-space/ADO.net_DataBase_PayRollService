@@ -15,8 +15,20 @@ Create Procedure Employee_DetailsPro  --here created procedure Employee_DetailsP
 @gender char(1)
 
 AS
-BEGIN
+BEGIN			--here insert data into table " PayRoll_Service2 "
 insert into PayRoll_Service2(employeeName, basicPay ,startDate,gender) values (@employeeName, @basicPay, @startDate, @gender) --insert data into PayRoll_Serivce2
+END;;
+
+select *from PayRoll_Service2;
+
+--------Update Table
+
+Create Procedure Employee_UpdateDetailsPro	--here created procedure Employee_DetailsPro
+@name varchar(50),
+@Basic_Pay  float
+AS
+BEGIN			--here update data into table " PayRoll_Service2 "
+update PayRoll_Service2 Set basicPay=@basicPay where employeeName=@employeeName
 END;;
 
 select *from PayRoll_Service2;
