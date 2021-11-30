@@ -32,3 +32,14 @@ update PayRoll_Service2 Set basicPay=@basicPay where employeeName=@employeeName
 END;;
 
 select *from PayRoll_Service2;
+
+-----Delete Record
+Create Procedure Employee_UpdateDetailsPro  ---here created procedure Employee_DetailsPro
+
+@employeeName varchar(10)
+AS
+BEGIN		---here delete data into table " PayRoll_Service2"
+ DELETE PayRoll_Service2 WHERE employeeName = @employeeName
+ END;;
+
+ select *from PayRoll_Service2;

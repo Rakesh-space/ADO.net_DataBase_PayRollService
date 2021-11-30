@@ -11,6 +11,7 @@ namespace ADO.net_DataBase_PayRollService
     class EmployeeRepository
     {
         //uc 1 ADO.NET Connection databse
+
         public static string connectionString = @"Data Source=(localdb)\ProjectsV13;Initial Catalog=PayRoll_Service1;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         // createdconnection objto connect with database
         SqlConnection sqlConnection = new SqlConnection(connectionString);
@@ -59,6 +60,7 @@ namespace ADO.net_DataBase_PayRollService
             }
         }
 
+        //Add Record
         public void AddEmployee(EmployeeModel model)
         {
             try
@@ -104,5 +106,104 @@ namespace ADO.net_DataBase_PayRollService
             }
 
         }
+
+        // updete record
+        public void UpdateSalary(EmployeeModel model)
+        {
+            try
+            {
+
+                using (this.sqlConnection)
+                {
+                    //here use the Sotred_Procedure "Employee_DetailsPro"
+                    EmployeeModel displeymodel = new EmployeeModel();
+                    SqlCommand command = new SqlCommand("dbo.spUpdateEmployeeDetails", this.sqlConnection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@name", model.employeeName);
+                    command.Parameters.AddWithValue("@Basic_Pay", model.basicPay);
+                    //command.Parameters.AddWithValue("@EmployeeId", model.id_num);
+                    //command.Parameters.AddWithValue("@StartDate", model.StartDate);
+                    //command.Parameters.AddWithValue("@Salary", model.Salary);
+                    //command.Parameters.AddWithValue("@Phone", model.PhoneNumber);
+                    // command.Parameters.AddWithValue("@address", model.Address);
+                    //command.Parameters.AddWithValue("@department", model.Department);
+                    //command.Parameters.AddWithValue("@gender", model.Gender);
+                    //command.Parameters.AddWithValue("@Deduction", model.Deduction);
+                    //command.Parameters.AddWithValue("@NetPay", model.NetPay);
+                    //command.Parameters.AddWithValue("@incomeTax", model.IncomeTax);
+                    //command.Parameters.AddWithValue("@Taxable_pay", model.TaxablePay);
+                    sqlConnection.Open();
+                    var result = command.ExecuteNonQuery();
+
+                    if (result != 0)
+                    {
+                        Console.WriteLine("Succesfull Updeted record");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Unsuccesfull");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+
+        }
+
+        // delete record
+        public void DeleteRecord(EmployeeModel model)
+        {
+            try
+            {
+
+                using (this.sqlConnection)
+                {
+                    EmployeeModel displeymodel = new EmployeeModel();
+                    //here use the Sotred_Procedure "Employee_DetailsPro"
+                    SqlCommand command = new SqlCommand("dbo.spDeleteEmployeeDetails1", this.sqlConnection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    //command.Parameters.AddWithValue("@name", model.Name);
+                    //command.Parameters.AddWithValue("@Basic_Pay", model.Basic_Pay);
+                    command.Parameters.AddWithValue("@employeeName", model.employeeName);
+                    //command.Parameters.AddWithValue("@StartDate", model.StartDate);
+                    //command.Parameters.AddWithValue("@Salary", model.Salary);
+                    //command.Parameters.AddWithValue("@Phone", model.PhoneNumber);
+                    // command.Parameters.AddWithValue("@address", model.Address);
+                    //command.Parameters.AddWithValue("@department", model.Department);
+                    //command.Parameters.AddWithValue("@gender", model.Gender);
+                    //command.Parameters.AddWithValue("@Deduction", model.Deduction);
+                    //command.Parameters.AddWithValue("@NetPay", model.NetPay);
+                    //command.Parameters.AddWithValue("@incomeTax", model.IncomeTax);
+                    //command.Parameters.AddWithValue("@Taxable_pay", model.TaxablePay);
+                    sqlConnection.Open();
+                    var result = command.ExecuteNonQuery();
+
+                    if (result != 0)
+                    {
+                        Console.WriteLine("Succesfull Deleted record");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Unsuccesfull");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+
+        }
+
     }
 }

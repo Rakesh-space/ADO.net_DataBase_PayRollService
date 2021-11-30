@@ -6,20 +6,27 @@ namespace ADO.net_DataBase_PayRollService
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            EmployeeRepository connection = new EmployeeRepository();
-            connection.GetAllEmployeeDetails();
-            Console.ReadLine();
+            //Console.WriteLine("Hello World!");
+            //EmployeeRepository connection = new EmployeeRepository();
+            //connection.GetAllEmployeeDetails();
+            //Console.ReadLine();
 
             EmployeeModel model = new EmployeeModel();
-            model.employeeName = "tester";
-            model.basicPay = 3560.50;
-            model.gender = "M";
-            model.startDate = DateTime.Now;
-         
+            //model.Name = "terisa";
+            //model.Basic_Pay = 300000;
+            //model.Gender = "F";
+            //model.StartDate = DateTime.Now;
+            model.employeeName = "Rakesh";
+
+            //EmployeeRepository Repo = new EmployeeRepository();
+            //Repo.AddEmployee(model);
+
+            //EmployeeRepository Repo = new EmployeeRepository();
+            //Repo.UpdateSalary(model);
+
 
             EmployeeRepository Repo = new EmployeeRepository();
-            Repo.AddEmployee(model);
+            Repo.DeleteRecord(model);
             Console.ReadLine();
         }
     }
